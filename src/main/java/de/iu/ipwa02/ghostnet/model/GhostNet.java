@@ -33,6 +33,7 @@ public class GhostNet {
 
     private String rescuerPhone;
 
+// Neue Geisternetze werden standardmäßig als gemeldet angelegt.
     public GhostNet() {
         this.status = GhostNetStatus.GEMELDET;
         this.anonymousReport = false;
