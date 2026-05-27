@@ -45,6 +45,7 @@ public class GhostNet {
     public Double getLatitude() {
         return latitude;
     }
+
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
@@ -57,4 +58,59 @@ public class GhostNet {
         this.longitude = longitude;
     }
 
+    public Double getEstimatedSize() {
+        return estimatedSize;
+    }
+
+    public void setEstimatedSize(Double estimatedSize) {
+        this.estimatedSize = estimatedSize;
+    }
+
+    public GhostNetStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(GhostNetStatus status) {
+        this.status = status;
+    }
+
+    public Boolean getAnonymousReport() {
+        return anonymousReport;
+    }
+
+    public void setAnonymousReport(Boolean anonymousReport) {
+        this.anonymousReport = anonymousReport;
+    }
+
+    public String getReporterName() {
+        return reporterName;
+    }
+
+    public void setReporterName(String reporterName) {
+        this.reporterName = reporterName;
+    }
+
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getRescuerName() {
+        return rescuerName;
+    }
+
+    public void setRescuerName(String rescuerName) {
+        this.rescuerName = rescuerName;
+    }
+
+    public String getRescuerPhone() {
+        return rescuerPhone;
+    }
+
+    public void setRescuerPhone(String rescuerPhone) {
+        this.rescuerPhone = rescuerPhone;
+    }
 }
