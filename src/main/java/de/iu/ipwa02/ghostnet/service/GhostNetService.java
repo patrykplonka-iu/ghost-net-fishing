@@ -58,4 +58,10 @@ public class GhostNetService {
             ghostNetRepository.save(ghostNet);
         }
     }   
+    public List<GhostNet> findOpenGhostNets() {
+    return ghostNetRepository.findByStatusIn(List.of(
+            GhostNetStatus.GEMELDET,
+            GhostNetStatus.BERGUNG_BEVORSTEHEND
+    ));
+    }
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Noch zu bergende Geisternetze</title>
+</head>
+<body>
+    <h1>Noch zu bergende Geisternetze</h1>
+
+    <p>
+        Auf dieser Seite werden Geisternetze angezeigt, die noch nicht geborgen oder als verschollen markiert wurden.
+    </p>
+
+    <p>
+        <a href="/">Zur Startseite</a> |
+        <a href="/ghostnets">Alle Geisternetze anzeigen</a> |
+        <a href="/ghostnets/new">Neues Geisternetz melden</a>
+    </p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Breitengrad</th>
+                <th>Längengrad</th>
+                <th>Geschätzte Größe</th>
+                <th>Status</th>
+                <th>Bergende Person</th>
+                <th>Telefonnummer Bergung</th>
+                <th>Aktion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ghostNet : ${ghostNets}">
+                <td th:text="${ghostNet.id}">1</td>
+                <td th:text="${ghostNet.latitude}">52.520008</td>
+                <td th:text="${ghostNet.longitude}">13.404954</td>
+                <td th:text="${ghostNet.estimatedSize}">25</td>
+                <td th:text="${ghostNet.status}">GEMELDET</td>
+                <td th:text="${ghostNet.rescuerName}">Max</td>
+                <td th:text="${ghostNet.rescuerPhone}">123456</td>
+                <td>
+                    <a th:if="${ghostNet.status.name() == 'GEMELDET'}"
+                       th:href="@{/ghostnets/{id}/assign(id=${ghostNet.id})}">
+                        Bergung übernehmen
+                    </a>
+
+                    <form th:if="${ghostNet.status.name() == 'BERGUNG_BEVORSTEHEND'}"
+                          th:action="@{/ghostnets/{id}/recover(id=${ghostNet.id})}"
+                          method="post"
+                          style="display:inline;">
+                        <button type="submit">Als geborgen melden</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

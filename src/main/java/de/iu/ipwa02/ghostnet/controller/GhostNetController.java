@@ -71,4 +71,9 @@ public class GhostNetController {
         ghostNetService.markAsMissing(id, reporterName, reporterPhone);
         return "redirect:/ghostnets";
     }
+    @GetMapping("/ghostnets/open")
+    public String showOpenGhostNets(Model model) {
+        model.addAttribute("ghostNets", ghostNetService.findOpenGhostNets());
+        return "open-ghostnets";
+    }
 }
