@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Geisternetz als verschollen melden</title>
+</head>
+<body>
+    <h1>Geisternetz als verschollen melden</h1>
+
+    <p>
+        Auf dieser Seite kann ein Geisternetz als verschollen gemeldet werden,
+        wenn es am angegebenen Standort nicht auffindbar ist.
+    </p>
+
+    <h2>Geisternetz</h2>
+
+    <p>
+        ID:
+        <span th:text="${ghostNet.id}">1</span>
+    </p>
+
+    <p>
+        Standort:
+        <span th:text="${ghostNet.latitude}">52.520008</span>,
+        <span th:text="${ghostNet.longitude}">13.404954</span>
+    </p>
+
+    <p>
+        Geschätzte Größe:
+        <span th:text="${ghostNet.estimatedSize}">25</span>
+    </p>
+
+    <p>
+        Aktueller Status:
+        <span th:text="${ghostNet.status}">GEMELDET</span>
+    </p>
+
+    <form th:action="@{/ghostnets/{id}/missing(id=${ghostNet.id})}" method="post">
+        <div>
+            <label for="reporterName">Name der meldenden Person:</label>
+            <input type="text" id="reporterName" name="reporterName" required>
+        </div>
+
+        <div>
+            <label for="reporterPhone">Telefonnummer:</label>
+            <input type="text" id="reporterPhone" name="reporterPhone" required>
+        </div>
+
+        <button type="submit">Als verschollen melden</button>
+    </form>
+
+    <p>
+        <a href="/ghostnets">Zurück zur Übersicht</a>
+    </p>
+</body>
+</html>

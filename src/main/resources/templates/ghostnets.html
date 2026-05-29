@@ -44,27 +44,34 @@
                 <td th:text="${ghostNet.reporterPhone}">123456</td>
                 <td th:text="${ghostNet.rescuerName}">Erika Musterfrau</td>
                 <td th:text="${ghostNet.rescuerPhone}">987654</td>
-                <td>
-                    <a th:if="${ghostNet.status.name() == 'GEMELDET'}"
-                    th:href="@{/ghostnets/{id}/assign(id=${ghostNet.id})}">
-                        Bergung übernehmen
-                    </a>
+            <td>
+                <a th:if="${ghostNet.status.name() == 'GEMELDET'}"
+                th:href="@{/ghostnets/{id}/assign(id=${ghostNet.id})}">
+                    Bergung übernehmen
+                </a>
 
-                    <form th:if="${ghostNet.status.name() == 'BERGUNG_BEVORSTEHEND'}"
-                        th:action="@{/ghostnets/{id}/recover(id=${ghostNet.id})}"
-                        method="post"
-                        style="display:inline;">
-                        <button type="submit">Als geborgen melden</button>
-                    </form>
+                <span th:if="${ghostNet.status.name() == 'GEMELDET'}"> | </span>
 
-                    <span th:if="${ghostNet.status.name() == 'GEBORGEN'}">
-                        Geborgen
-                    </span>
+                <a th:if="${ghostNet.status.name() == 'GEMELDET'}"
+                th:href="@{/ghostnets/{id}/missing(id=${ghostNet.id})}">
+                    Als verschollen melden
+                </a>
 
-                    <span th:if="${ghostNet.status.name() == 'VERSCHOLLEN'}">
-                        Verschollen
-                    </span>
-                </td>
+                <form th:if="${ghostNet.status.name() == 'BERGUNG_BEVORSTEHEND'}"
+                    th:action="@{/ghostnets/{id}/recover(id=${ghostNet.id})}"
+                    method="post"
+                    style="display:inline;">
+                    <button type="submit">Als geborgen melden</button>
+                </form>
+
+                <span th:if="${ghostNet.status.name() == 'GEBORGEN'}">
+                    Geborgen
+                </span>
+
+                <span th:if="${ghostNet.status.name() == 'VERSCHOLLEN'}">
+                    Verschollen
+                </span>
+            </td>
             </tr>
         </tbody>
     </table>

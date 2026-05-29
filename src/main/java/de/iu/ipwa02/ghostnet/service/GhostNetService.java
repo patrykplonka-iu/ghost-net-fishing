@@ -45,6 +45,17 @@ public class GhostNetService {
     if (ghostNet.getStatus() == GhostNetStatus.BERGUNG_BEVORSTEHEND) {
         ghostNet.setStatus(GhostNetStatus.GEBORGEN);
         ghostNetRepository.save(ghostNet);
+        }
     }
-}
+    public void markAsMissing(Long id, String reporterName, String reporterPhone) {
+        GhostNet ghostNet = findGhostNetById(id);
+
+        if (ghostNet.getStatus() == GhostNetStatus.GEMELDET) {
+            ghostNet.setReporterName(reporterName);
+            ghostNet.setReporterPhone(reporterPhone);
+            ghostNet.setAnonymousReport(false);
+            ghostNet.setStatus(GhostNetStatus.VERSCHOLLEN);
+            ghostNetRepository.save(ghostNet);
+        }
+    }   
 }

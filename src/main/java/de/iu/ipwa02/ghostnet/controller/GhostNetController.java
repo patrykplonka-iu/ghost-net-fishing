@@ -56,5 +56,19 @@ public class GhostNetController {
     public String markAsRecovered(@PathVariable Long id) {
         ghostNetService.markAsRecovered(id);
         return "redirect:/ghostnets";
-}
+    }
+    @GetMapping("/ghostnets/{id}/missing")
+    public String showMissingForm(@PathVariable Long id, Model model) {
+        model.addAttribute("ghostNet", ghostNetService.findGhostNetById(id));
+        return "mark-missing";
+    }
+    @PostMapping("/ghostnets/{id}/missing")
+    public String markAsMissing(
+            @PathVariable Long id,
+            @RequestParam String reporterName,
+            @RequestParam String reporterPhone) {
+
+        ghostNetService.markAsMissing(id, reporterName, reporterPhone);
+        return "redirect:/ghostnets";
+    }
 }
