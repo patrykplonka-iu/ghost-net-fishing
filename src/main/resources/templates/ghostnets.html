@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Geisternetze anzeigen</title>
+</head>
+<body>
+    <h1>Geisternetze anzeigen</h1>
+
+    <p>
+        Auf dieser Seite werden die bisher erfassten Geisternetze angezeigt.
+    </p>
+
+    <p>
+        <a href="/">Zur Startseite</a> |
+        <a href="/ghostnets/new">Neues Geisternetz melden</a>
+    </p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Breitengrad</th>
+                <th>Längengrad</th>
+                <th>Geschätzte Größe</th>
+                <th>Status</th>
+                <th>Anonym</th>
+                <th>Meldende Person</th>
+                <th>Telefonnummer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ghostNet : ${ghostNets}">
+                <td th:text="${ghostNet.id}">1</td>
+                <td th:text="${ghostNet.latitude}">52.314067</td>
+                <td th:text="${ghostNet.longitude}">13.676767</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

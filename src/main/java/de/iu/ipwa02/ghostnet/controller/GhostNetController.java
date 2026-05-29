@@ -16,6 +16,12 @@ public class GhostNetController {
         this.ghostNetService = ghostNetService;
     }
 
+    @GetMapping("/ghostnets")
+    public String showGhostNets(Model model) {
+        model.addAttribute("ghostNets", ghostNetService.findAllGhostNets());
+        return "ghostnets";
+    }
+
     @GetMapping("/ghostnets/new")
     public String showReportForm(Model model) {
         model.addAttribute("ghostNet", new GhostNet());
@@ -25,6 +31,6 @@ public class GhostNetController {
     @PostMapping("/ghostnets")
     public String saveGhostNet(GhostNet ghostNet) {
         ghostNetService.saveGhostNet(ghostNet);
-        return "redirect:/ghostnets/new";
+        return "redirect:/ghostnets";
     }
 }
