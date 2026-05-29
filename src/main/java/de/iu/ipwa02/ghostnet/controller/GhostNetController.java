@@ -5,7 +5,9 @@ import de.iu.ipwa02.ghostnet.service.GhostNetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GhostNetController {
@@ -33,4 +35,26 @@ public class GhostNetController {
         ghostNetService.saveGhostNet(ghostNet);
         return "redirect:/ghostnets";
     }
+
+    @GetMapping("/ghostnets/{id}/assign")
+    public String showAssignForm(@PathVariable Long id, Model model) {
+        model.addAttribute("ghostNet", ghostNetService.findGhostNetById(id));
+        return "assign-rescuer";
+    }
+
+    @PostMapping("/ghostnets/{id}/assign")
+    public String assignRescuer(
+            @PathVariable Long id,
+            @RequestParam String rescuerName,
+            @RequestParam String rescuerPhone) {
+
+        ghostNetService.assignRescuer(id, rescuerName, rescuerPhone);
+        return "redirect:/ghostnets";
+    }
+
+    @PostMapping("/ghostnets/{id}/recover")
+    public String markAsRecovered(@PathVariable Long id) {
+        ghostNetService.markAsRecovered(id);
+        return "redirect:/ghostnets";
+}
 }
