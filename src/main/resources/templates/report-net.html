@@ -26,7 +26,7 @@
         </div>
 
         <div>
-            <label for="estimatedSize">Geschätzte Größe:</label>
+            <label for="estimatedSize">Geschätzte Größe (m²):</label>
             <input type="number" step="0.1" id="estimatedSize" th:field="*{estimatedSize}">
             <span th:if="${#fields.hasErrors('estimatedSize')}" th:errors="*{estimatedSize}"></span>
         </div>

@@ -17,14 +17,15 @@
         <a href="/ghostnets">Alle Geisternetze anzeigen</a> |
         <a href="/ghostnets/new">Neues Geisternetz melden</a>
     </p>
-
-    <table border="1">
-        <thead>
+    <p th:if="${#lists.isEmpty(ghostNets)}">
+        Es sind derzeit keine offenen Geisternetze vorhanden.
+    </p>
+    <table th:if="${!#lists.isEmpty(ghostNets)}" border="1">        <thead>
             <tr>
                 <th>ID</th>
                 <th>Breitengrad</th>
                 <th>Längengrad</th>
-                <th>Geschätzte Größe</th>
+                <th>Geschätzte Größe (m²)</th>
                 <th>Status</th>
                 <th>Bergende Person</th>
                 <th>Telefonnummer Bergung</th>

@@ -28,7 +28,7 @@ public class GhostNet {
     @DecimalMax(value = "180.0", message = "Die Längengrad darf höchstens 180 betragen.")
     private Double longitude;
 
-    @Positive(message = "Die geschätzte Größe muss eine positive Zahl sein.")
+    @Positive(message = "Die geschätzte Größe (m²): muss eine positive Zahl sein.")
     @NotNull
     private Double estimatedSize;
 
