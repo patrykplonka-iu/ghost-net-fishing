@@ -6,6 +6,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 
 @Entity
 public class GhostNet {
@@ -14,10 +18,18 @@ public class GhostNet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Der Breitengrad muss angegeben werden.")
+    @DecimalMin(value = "-90.0", message = "Der Breitengrad muss mindestens -90 betragen.")
+    @DecimalMax(value = "90.0", message = "Der Breitengrad darf höchstens 90 betragen.")
     private Double latitude;
 
+    @NotNull(message = "Die Längengrad muss angegeben werden.")
+    @DecimalMin(value = "-180.0", message = "Die Längengrad muss mindestens -180 betragen.")
+    @DecimalMax(value = "180.0", message = "Die Längengrad darf höchstens 180 betragen.")
     private Double longitude;
 
+    @Positive(message = "Die geschätzte Größe muss eine positive Zahl sein.")
+    @NotNull
     private Double estimatedSize;
 
     @Enumerated(EnumType.STRING)

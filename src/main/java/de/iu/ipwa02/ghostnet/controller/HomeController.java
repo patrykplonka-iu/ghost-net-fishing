@@ -17,7 +17,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        int openGhostNetCount = ghostNetService.findAllGhostNets().size();
+        int openGhostNetCount = ghostNetService.findOpenGhostNets().size();
         model.addAttribute("openGhostNetCount", openGhostNetCount);
         return "index";
     }

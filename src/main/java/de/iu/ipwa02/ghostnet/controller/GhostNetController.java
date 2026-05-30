@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class GhostNetController {
@@ -30,11 +32,15 @@ public class GhostNetController {
         return "report-net";
     }
 
-    @PostMapping("/ghostnets")
-    public String saveGhostNet(GhostNet ghostNet) {
-        ghostNetService.saveGhostNet(ghostNet);
-        return "redirect:/ghostnets";
+@PostMapping("/ghostnets")
+public String saveGhostNet(@Valid GhostNet ghostNet, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+        return "report-net";
     }
+
+    ghostNetService.saveGhostNet(ghostNet);
+    return "redirect:/ghostnets";
+}
 
     @GetMapping("/ghostnets/{id}/assign")
     public String showAssignForm(@PathVariable Long id, Model model) {
