@@ -26,8 +26,13 @@ public class GhostNetService {
     }
 
     public GhostNet saveGhostNet(GhostNet ghostNet) {
-        return ghostNetRepository.save(ghostNet);
-    }
+        if (Boolean.TRUE.equals(ghostNet.getAnonymousReport())) {
+            ghostNet.setReporterName(null);
+            ghostNet.setReporterPhone(null);
+        }
+
+    return ghostNetRepository.save(ghostNet);
+}
 
     public void assignRescuer(Long id, String rescuerName, String rescuerPhone) {
         GhostNet ghostNet = findGhostNetById(id);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns:th="http://www.thymeleaf.org"></html>
 <head>
     <meta charset="UTF-8">
     <title>Ghost Net Fishing</title>
@@ -19,5 +19,11 @@
             <li><a href="/ghostnets/new">Geisternetz melden</a></li>
         </ul>
     </nav>
+    <h2>Aktueller Stand</h2>
+
+<p>
+    Noch zu bergende Geisternetze:
+    <strong th:text="${openGhostNetCount}">0</strong>
+</p>
 </body>
 </html>
