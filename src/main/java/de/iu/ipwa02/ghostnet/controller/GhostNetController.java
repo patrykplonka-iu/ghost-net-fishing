@@ -84,8 +84,8 @@ public String saveGhostNet(@Valid GhostNet ghostNet, BindingResult bindingResult
         model.addAttribute("ghostNets", ghostNetService.findOpenGhostNets());
         return "open-ghostnets";
     }
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String handleIllegalArgumentException(IllegalArgumentException exception, Model model) {
+    @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
+    public String handleApplicationException(RuntimeException exception, Model model) {
         model.addAttribute("errorMessage", exception.getMessage());
         return "error";
     }

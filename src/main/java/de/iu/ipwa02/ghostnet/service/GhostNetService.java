@@ -37,32 +37,41 @@ public class GhostNetService {
     public void assignRescuer(Long id, String rescuerName, String rescuerPhone) {
         GhostNet ghostNet = findGhostNetById(id);
 
-        if (ghostNet.getStatus() == GhostNetStatus.GEMELDET) {
-            ghostNet.setRescuerName(rescuerName);
-            ghostNet.setRescuerPhone(rescuerPhone);
-            ghostNet.setStatus(GhostNetStatus.BERGUNG_BEVORSTEHEND);
-            ghostNetRepository.save(ghostNet);
+        if (ghostNet.getStatus() != GhostNetStatus.GEMELDET) {
+            throw new IllegalStateException("Die Bergung kann nur für gemeldete Geisternetze übernommen werden.");
         }
-    }
-    public void markAsRecovered(Long id) {
-    GhostNet ghostNet = findGhostNetById(id);
 
-    if (ghostNet.getStatus() == GhostNetStatus.BERGUNG_BEVORSTEHEND) {
+        ghostNet.setRescuerName(rescuerName);
+        ghostNet.setRescuerPhone(rescuerPhone);
+        ghostNet.setStatus(GhostNetStatus.BERGUNG_BEVORSTEHEND);
+        ghostNetRepository.save(ghostNet);
+    }
+
+    public void markAsRecovered(Long id) {
+        GhostNet ghostNet = findGhostNetById(id);
+
+        if (ghostNet.getStatus() != GhostNetStatus.BERGUNG_BEVORSTEHEND) {
+            throw new IllegalStateException("Nur Geisternetze mit bevorstehender Bergung können als geborgen gemeldet werden.");
+        }
+
         ghostNet.setStatus(GhostNetStatus.GEBORGEN);
         ghostNetRepository.save(ghostNet);
-        }
     }
+
     public void markAsMissing(Long id, String reporterName, String reporterPhone) {
         GhostNet ghostNet = findGhostNetById(id);
 
-        if (ghostNet.getStatus() == GhostNetStatus.GEMELDET) {
-            ghostNet.setReporterName(reporterName);
-            ghostNet.setReporterPhone(reporterPhone);
-            ghostNet.setAnonymousReport(false);
-            ghostNet.setStatus(GhostNetStatus.VERSCHOLLEN);
-            ghostNetRepository.save(ghostNet);
+        if (ghostNet.getStatus() != GhostNetStatus.GEMELDET) {
+            throw new IllegalStateException("Nur gemeldete Geisternetze können als verschollen gemeldet werden.");
         }
-    }   
+
+        ghostNet.setReporterName(reporterName);
+        ghostNet.setReporterPhone(reporterPhone);
+        ghostNet.setAnonymousReport(false);
+        ghostNet.setStatus(GhostNetStatus.VERSCHOLLEN);
+        ghostNetRepository.save(ghostNet);
+    }  
+
     public List<GhostNet> findOpenGhostNets() {
     return ghostNetRepository.findByStatusIn(List.of(
             GhostNetStatus.GEMELDET,
