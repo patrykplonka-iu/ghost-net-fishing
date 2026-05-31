@@ -4,12 +4,14 @@ import de.iu.ipwa02.ghostnet.model.GhostNet;
 import de.iu.ipwa02.ghostnet.service.GhostNetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Controller
 public class GhostNetController {
@@ -81,5 +83,10 @@ public String saveGhostNet(@Valid GhostNet ghostNet, BindingResult bindingResult
     public String showOpenGhostNets(Model model) {
         model.addAttribute("ghostNets", ghostNetService.findOpenGhostNets());
         return "open-ghostnets";
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgumentException(IllegalArgumentException exception, Model model) {
+        model.addAttribute("errorMessage", exception.getMessage());
+        return "error";
     }
 }
