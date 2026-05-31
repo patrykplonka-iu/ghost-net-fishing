@@ -38,12 +38,12 @@
     <form th:action="@{/ghostnets/{id}/assign(id=${ghostNet.id})}" method="post">
         <div>
             <label for="rescuerName">Name der bergenden Person:</label>
-            <input type="text" id="rescuerName" name="rescuerName">
+            <input type="text" id="rescuerName" name="rescuerName" required>
         </div>
 
         <div>
             <label for="rescuerPhone">Telefonnummer:</label>
-            <input type="text" id="rescuerPhone" name="rescuerPhone">
+            <input type="text" id="rescuerPhone" name="rescuerPhone" required>
         </div>
 
         <button type="submit">Bergung übernehmen</button>
